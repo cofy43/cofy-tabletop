@@ -10,5 +10,8 @@
     "build:all": "pnpm --filter ... build",
     "test:all": "pnpm --filter ... test",
     "lint:all": "pnpm --filter ... lint"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
   }
 }
