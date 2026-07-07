@@ -9,7 +9,7 @@ function App() {
   const [playerName, setPlayerName] = useState('');
   const [gameType, setGameType] = useState<'TIC_TAC_TOE' | 'CHINESE_CHECKERS'>('TIC_TAC_TOE');
   const [joinId, setJoinId] = useState('');
-  
+
   const inLobby = !matchId && !gameState;
   const inWaitingRoom = matchId && !gameState?.state;
   const inGame = matchId && gameState?.state;
@@ -72,7 +72,13 @@ function App() {
                 </div>
                 <div>
                   <label className="block text-sm text-textMuted mb-2">Game Type</label>
-                  onChange={(e) => { const v = e.target.value; if (v === 'TIC_TAC_TOE' || v === 'CHINESE_CHECKERS') setGameType(v); }}
+                  <select
+                    value={gameType}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg p-3 outline-none focus:border-primary transition-colors text-white"
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      if (v === 'TIC_TAC_TOE' || v === 'CHINESE_CHECKERS') setGameType(v);
+                    }}
                   >
                     <option value="TIC_TAC_TOE">Tic Tac Toe</option>
                     <option value="CHINESE_CHECKERS">Chinese Checkers (Simplified)</option>
@@ -152,17 +158,17 @@ function App() {
 
             <div className="flex-1 w-full flex justify-center items-center">
               {gameState.gameType === 'TIC_TAC_TOE' && (
-                <TicTacToeBoard 
-                  state={gameState.state} 
-                  playerId={socketId!} 
-                  onMove={sendMove} 
+                <TicTacToeBoard
+                  state={gameState.state}
+                  playerId={socketId!}
+                  onMove={sendMove}
                 />
               )}
               {gameState.gameType === 'CHINESE_CHECKERS' && (
-                <ChineseCheckersBoard 
-                  state={gameState.state} 
-                  playerId={socketId!} 
-                  onMove={sendMove} 
+                <ChineseCheckersBoard
+                  state={gameState.state}
+                  playerId={socketId!}
+                  onMove={sendMove}
                 />
               )}
             </div>
