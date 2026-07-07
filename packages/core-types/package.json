@@ -1,0 +1,27 @@
+{
+  "name": "@cofy-tabletop/core-types",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shared domain contracts and TypeScript interfaces for the cofy-tabletop monorepo.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist",
+    "lint": "echo 'No linter configured for core-types'",
+    "test": "echo 'No tests configured for core-types'"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
