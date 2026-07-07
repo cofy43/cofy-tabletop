@@ -72,10 +72,7 @@ function App() {
                 </div>
                 <div>
                   <label className="block text-sm text-textMuted mb-2">Game Type</label>
-                  <select
-                    value={gameType}
-                    onChange={e => setGameType(e.target.value as any)}
-                    className="w-full bg-black/20 border border-white/10 rounded-lg p-3 outline-none focus:border-primary transition-colors appearance-none"
+                  onChange={(e) => { const v = e.target.value; if (v === 'TIC_TAC_TOE' || v === 'CHINESE_CHECKERS') setGameType(v); }}
                   >
                     <option value="TIC_TAC_TOE">Tic Tac Toe</option>
                     <option value="CHINESE_CHECKERS">Chinese Checkers (Simplified)</option>
