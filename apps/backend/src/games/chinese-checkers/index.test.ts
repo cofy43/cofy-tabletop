@@ -35,7 +35,7 @@ describe('ChineseCheckersEngine', () => {
     const jumpState = engine.applyMove(state, { from: {x: 1, y: 0}, to: {x: 2, y: 0}, playerId: 'p1' });
     // In actual jump scenarios, piece jumps over another. Here we can just mock a scenario or test in isolation.
     // For now just assert pure move is applied.
-    expect(jumpState.board.cells[0]![2]).toBe('p1');
+    expect(jumpState.board.cells[0]?.[2]).toBe('p1');
   });
 
   test('applyMove should return a new state without mutating the old one', () => {
