@@ -1,5 +1,6 @@
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import { GameLobby } from './lobby';
 
 const PORT = Number(process.env['PORT']) || 3000;
 
@@ -10,16 +11,10 @@ const io = new Server(httpServer, {
   },
 });
 
-io.on('connection', (socket) => {
-  console.info(`[Socket] Client connected: ${socket.id}`);
-
-  socket.on('disconnect', () => {
-    console.info(`[Socket] Client disconnected: ${socket.id}`);
-  });
-});
+const lobby = new GameLobby(io);
 
 httpServer.listen(PORT, () => {
   console.info(`🚀 Cofy Tabletop server running on port ${String(PORT)}`);
 });
 
-export { io, httpServer };
+export { io, httpServer, lobby };
