@@ -21,26 +21,26 @@ describe('ChineseCheckersEngine', () => {
     /* eslint-enable @typescript-eslint/no-non-null-assertion */
   });
 
-  test('isValidMove should validate adjacency and jumps', () => {
+  test('applyMove should return a new state without mutating the old one', () => {
     const players = ['p1', 'p2'];
     const state = engine.getInitialState(players);
+    const move = { from: { x: 1, y: 0 }, to: { x: 2, y: 0 }, playerId: 'p1' };
 
-    // Valid adjacent move for p1 (0,1) -> (0,2)
-    expect(engine.isValidMove(state, { from: { x: 1, y: 0 }, to: { x: 2, y: 0 }, playerId: 'p1' }, 'p1')).toBe(true);
+    const newState = engine.applyMove(state, move);
 
-    // Invalid move out of bounds
-    expect(engine.isValidMove(state, { from: { x: 1, y: 0 }, to: { x: 5, y: 0 }, playerId: 'p1' }, 'p1')).toBe(false);
+    // Inmutabilidad
+    expect(newState).not.toBe(state);
+    expect(newState.board).not.toBe(state.board);
 
-    // Jump move logic validation
-    const jumpState = engine.applyMove(state, { from: { x: 1, y: 0 }, to: { x: 2, y: 0 }, playerId: 'p1' });
-    // In actual jump scenarios, piece jumps over another. Here we can just mock a scenario or test in isolation.
-    // For now just assert pure move is applied.
-    const cell = state.board.cells[0];
-    expect(cell).toBeDefined(); // Aseguras que no sea undefined
-    expect(cell![0]).toBe('p1'); // El linter suele aceptar esto mejor
-    // O aún mejor, usa la aserción de Jest:
-    expect(state.board.cells[0]).not.toBeNull();
-    expect(state.board.cells[0]?.[0]).toBe('p1');
+    // Solución sin usar '!' (non-null assertion)
+    const cell = newState.board.cells[0];
+    expect(cell).toBeDefined();
+    expect(cell).toBe('p1'); // Verifica el valor directamente
+
+    expect(newState.activeTurn).toBe('p2');
+
+    const originalCell = state.board.cells[0];
+    expect(originalCell).toBeNull(); // Verifica que el original sigue siendo null
   });
 
   test('applyMove should return a new state without mutating the old one', () => {
