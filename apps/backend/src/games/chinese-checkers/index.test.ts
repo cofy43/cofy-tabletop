@@ -21,7 +21,7 @@ describe('ChineseCheckersEngine', () => {
     /* eslint-enable @typescript-eslint/no-non-null-assertion */
   });
 
-  test('isValidMove should validate adjacency and jumps', () => {
+  test('applyMove should return a new state without mutating the old one', () => {
     const players = ['p1', 'p2'];
     const state = engine.getInitialState(players);
 

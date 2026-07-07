@@ -84,7 +84,7 @@ export class GameLobby {
         if (!match?.state) return;
 
         if (match.gameType === 'TIC_TAC_TOE') {
-          const state = match.state as ReturnType<typeof this.ticTacToe.getInitialState>;
+          const state = match.state as ReturnType<TicTacToeEngine['getInitialState']>;
           const tttMove = move as TicTacToeMove;
           
           if (this.ticTacToe.isValidMove(state, tttMove, socket.id)) {
@@ -92,7 +92,7 @@ export class GameLobby {
             this.io.to(matchId).emit('gameStateUpdated', match);
           }
         } else if (match.gameType === 'CHINESE_CHECKERS') {
-          const state = match.state as ReturnType<typeof this.chineseCheckers.getInitialState>;
+          const state = match.state as ReturnType<ChineseCheckersEngine['getInitialState']>;
           const ccMove = move as ChineseCheckersMove;
 
           if (this.chineseCheckers.isValidMove(state, ccMove, socket.id)) {
