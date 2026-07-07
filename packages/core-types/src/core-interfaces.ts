@@ -9,7 +9,7 @@ export interface Player {
 
 export interface Match<TState> {
   readonly matchId: string;
-  readonly gameType: 'TIC_TAC_TOE' | 'CHESS' | 'CUSTOM';
+  readonly gameType: 'TIC_TAC_TOE' | 'CHESS' | 'CUSTOM' | 'CHINESE_CHECKERS';
   readonly players: ReadonlyArray<Player>;
   state: TState; // This is the only place where the Lobby updates the overall state
 }
