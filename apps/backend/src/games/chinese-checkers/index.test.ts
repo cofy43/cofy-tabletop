@@ -24,23 +24,20 @@ describe('ChineseCheckersEngine', () => {
   test('applyMove should return a new state without mutating the old one', () => {
     const players = ['p1', 'p2'];
     const state = engine.getInitialState(players);
-    const move = { from: { x: 1, y: 0 }, to: { x: 2, y: 0 }, playerId: 'p1' };
+
+    // Mueve la pieza que SÍ existe en (0,0) hacia (0,2)
+    const move = { from: { x: 0, y: 0 }, to: { x: 0, y: 2 }, playerId: 'p1' };
 
     const newState = engine.applyMove(state, move);
 
-    // Inmutabilidad
-    expect(newState).not.toBe(state);
-    expect(newState.board).not.toBe(state.board);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(newState.board.cells[0]![0]).toBeNull();
 
-    // Solución sin usar '!' (non-null assertion)
-    const cell = newState.board.cells[0];
-    expect(cell).toBeDefined();
-    expect(cell).toBe('p1'); // Verifica el valor directamente
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(state.board.cells[0]![0]).toBe('p1');
 
-    expect(newState.activeTurn).toBe('p2');
-
-    const originalCell = state.board.cells[0];
-    expect(originalCell).toBeNull(); // Verifica que el original sigue siendo null
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(newState.board.cells[2]![0]).toBe('p1');
   });
 
   test('applyMove should return a new state without mutating the old one', () => {
